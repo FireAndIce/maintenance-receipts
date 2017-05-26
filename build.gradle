@@ -20,6 +20,8 @@ dependencies {
     compile 'com.google.oauth-client:google-oauth-client-jetty:1.22.0'
     compile 'com.google.apis:google-api-services-sheets:v4-rev472-1.22.0'
     compile 'com.google.apis:google-api-services-drive:v3-rev72-1.22.0'
+    compile 'org.immutables:gson:2.5.1'
+    compile 'junit:junit:4.4'
 
     compile 'org.libreoffice:jurt:5.3.2'
     compile 'org.libreoffice:juh:5.3.2'
