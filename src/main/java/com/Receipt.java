@@ -2,6 +2,8 @@ package com;
 
 import com.google.api.services.drive.Drive;
 
+import java.awt.*;
+
 
 /**
  * Created by root on 16/5/17.
@@ -109,5 +111,10 @@ public class Receipt {
         writeSheet.updateAmount(unit.getAmountReceived());
 
         driveOps.exportFileToPDF(driveservice, fileId, unit.getInvoice() + "-" + unit.getUnitNo() + "-" + unit.getOwnerName() +".pdf"/*"t.pdf"*/);
+    }
+
+    public void printReceipt() {
+        Desktop desktop = Desktop.getDesktop();
+//        desktop.
     }
 }

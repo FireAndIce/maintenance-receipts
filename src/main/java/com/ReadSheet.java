@@ -243,28 +243,29 @@ public class ReadSheet {
 
 
             for(List row: values) {
-                String fNo = (String) row.get(0);
-                if(fNo != null && fNo.equals(unit.getUnitNo()/*unitNo*/)) {
-                    System.out.println(row);
-                    String invoice = (String) row.get(/*5*/InvoiceColumn.INVOICE_NO.getRange(quarter));
-                    String owner = (String) row.get(1);
-                    String[] phoneNumbers = splitPhoneNumbers((String) row.get(2));
-                    String date = (String) row.get(/*4*/DateColumn.DATE.getRange(quarter));
-                    String chequeNo = (String) row.get(/*6*/ChequeColumn.CHEQUE_NO.getRange(quarter));
-                    String month1 = (String) row.get(Month1Column.MONTH_1.getRange(quarter));
-                    String month2 = (String) row.get(Month2Column.MONTH_2.getRange(quarter));
-                    String month3 = (String) row.get(Month3Column.MONTH_3.getRange(quarter));
+                try {
+                    String fNo = (String) row.get(0);
+                    if (fNo != null && fNo.equals(unit.getUnitNo()/*unitNo*/)) {
+                        System.out.println(row);
+                        String invoice = (String) row.get(/*5*/InvoiceColumn.INVOICE_NO.getRange(quarter));
+                        String owner = (String) row.get(1);
+                        String[] phoneNumbers = splitPhoneNumbers((String) row.get(2));
+                        String date = (String) row.get(/*4*/DateColumn.DATE.getRange(quarter));
+                        String chequeNo = (String) row.get(/*6*/ChequeColumn.CHEQUE_NO.getRange(quarter));
+                        String month1 = (String) row.get(Month1Column.MONTH_1.getRange(quarter));
+                        String month2 = (String) row.get(Month2Column.MONTH_2.getRange(quarter));
+                        String month3 = (String) row.get(Month3Column.MONTH_3.getRange(quarter));
 
-                    String amountReceived = totalAmountReceived(month1, month2, month3);
-                    System.out.println("amountReceived: " + amountReceived);
+                        String amountReceived = totalAmountReceived(month1, month2, month3);
+                        System.out.println("amountReceived: " + amountReceived);
 //                    String amountReceived = (String) row.get(7);
 
-                    unit.setInvoice(invoice);
-                    unit.setOwnerName(owner);
-                    unit.setPhoneNumbers(phoneNumbers);
-                    unit.setDate(date);
-                    unit.setChequeNo(chequeNo);
-                    unit.setAmountReceived(amountReceived);
+                        unit.setInvoice(invoice);
+                        unit.setOwnerName(owner);
+                        unit.setPhoneNumbers(phoneNumbers);
+                        unit.setDate(date);
+                        unit.setChequeNo(chequeNo);
+                        unit.setAmountReceived(amountReceived);
 
                     /*flat = new Flat();
                     flat.setFlatNo(fNo);
@@ -272,6 +273,9 @@ public class ReadSheet {
                     flat.setDate(date);
                     flat.setChequeNo(chequeNo);
                     flat.setAmountReceived(amountReceived);*/
+                    }
+                }catch (IndexOutOfBoundsException e) {
+                    e.printStackTrace();
                 }
             }
         } catch (IOException e) {
