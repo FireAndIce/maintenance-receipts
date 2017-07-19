@@ -68,6 +68,7 @@ public class GangaJamunaUI {
                 receipt.setBillTo(unit.getOwnerName());
 
         //        receipt.setUnitNo(unit.getUnitNo());
+                receipt.setQuarter(quarter);
                   receipt.setDescription(quarterDescription);
         //        receipt.setLateFee();
                 receipt.setAmount(unit.getAmountReceived());

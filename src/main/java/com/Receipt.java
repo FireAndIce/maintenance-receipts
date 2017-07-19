@@ -3,6 +3,8 @@ package com;
 import com.google.api.services.drive.Drive;
 
 import java.awt.*;
+import java.util.HashMap;
+import java.util.Map;
 
 
 /**
@@ -12,9 +14,11 @@ public class Receipt {
 
     private static final String MAINTENANCE_FEE_DESCRIPTION = "Maintenance Fee x 3 months ";
     static String FOLDER_QUARTER1 = "0ByZTOYXLr6P9Y1d1eHZKaWIzejA";
-    static String FOLDER_QUARTER2 = "Quarter2";
-    static String FOLDER_QUARTER3 = "Quarter3";
-    static String FOLDER_QUARTER4 = "Quarter4";
+    static String FOLDER_QUARTER2 = "0ByZTOYXLr6P9MHVCWXM0WndaZk0";
+    static String FOLDER_QUARTER3 = "0ByZTOYXLr6P9Q1RVT0hQS3VWZlk";
+    static String FOLDER_QUARTER4 = "0ByZTOYXLr6P9UnVtSmZnb2NJa1E";
+
+    Map<MaintenanceReceipts.Quarter, String> quarterHashMap = new HashMap<MaintenanceReceipts.Quarter, String>() ;
 
     Unit unit;
 
@@ -25,9 +29,14 @@ public class Receipt {
     String description;
     String amount;
     String lateFee;
+    private MaintenanceReceipts.Quarter quarter;
 
     public Receipt(Unit unit) {
         this.unit = unit;
+        quarterHashMap.put(MaintenanceReceipts.Quarter.QUARTER_1, FOLDER_QUARTER1);
+        quarterHashMap.put(MaintenanceReceipts.Quarter.QUARTER_2, FOLDER_QUARTER2);
+        quarterHashMap.put(MaintenanceReceipts.Quarter.QUARTER_3, FOLDER_QUARTER3);
+        quarterHashMap.put(MaintenanceReceipts.Quarter.QUARTER_4, FOLDER_QUARTER4);
     }
 
     public String getInvoiceNo() {
@@ -93,7 +102,9 @@ public class Receipt {
 
         String fileId = driveOps.copyFile(driveservice, WriteSheet.spreadsheetId, unit.getInvoice() + "-" + unit.getUnitNo() + "-" + unit.getOwnerName());
         System.out.println(fileId);
-        driveOps.moveFile(driveservice, fileId, FOLDER_QUARTER1);
+        String moveFileToFolderId;
+        moveFileToFolderId = quarterHashMap.get(quarter);
+        driveOps.moveFile(driveservice, fileId, moveFileToFolderId/*FOLDER_QUARTER2*/);
 
 
 
@@ -116,5 +127,9 @@ public class Receipt {
     public void printReceipt() {
         Desktop desktop = Desktop.getDesktop();
 //        desktop.
+    }
+
+    public void setQuarter(MaintenanceReceipts.Quarter quarter) {
+        this.quarter = quarter;
     }
 }
