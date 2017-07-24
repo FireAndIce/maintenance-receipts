@@ -15,6 +15,7 @@ import com.google.api.services.drive.DriveScopes;
 import com.google.api.services.sheets.v4.Sheets;
 import com.google.api.services.sheets.v4.SheetsScopes;
 
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -86,8 +87,10 @@ public class MaintenanceReceipts {
      */
     public static Credential authorize() throws IOException {
         // Load client secrets.
+//        InputStream in =
+//                Quickstart.class.getResourceAsStream("/resources/client_secret.json");
         InputStream in =
-                Quickstart.class.getResourceAsStream("/client_secret.json");
+                new FileInputStream("/media/Workspace/git-repo/maintenance-receipts/src/main/resources/client_secret.json");
         GoogleClientSecrets clientSecrets =
                 GoogleClientSecrets.load(JSON_FACTORY, new InputStreamReader(in));
 
@@ -107,8 +110,10 @@ public class MaintenanceReceipts {
 
     public static Credential authorizeWrite() throws IOException {
         // Load client secrets.
+//        InputStream in =
+//                Quickstart.class.getResourceAsStream("/client_secret.json");
         InputStream in =
-                Quickstart.class.getResourceAsStream("/client_secret.json");
+                new FileInputStream("/media/Workspace/git-repo/maintenance-receipts/src/main/resources/client_secret.json");
         GoogleClientSecrets clientSecrets =
                 GoogleClientSecrets.load(JSON_FACTORY, new InputStreamReader(in));
 
@@ -127,8 +132,10 @@ public class MaintenanceReceipts {
     }
 
     public static Credential authorizeDrive() throws IOException {
+        /*InputStream in =
+                Quickstart.class.getResourceAsStream("/client_secret.json");*/
         InputStream in =
-                Quickstart.class.getResourceAsStream("/client_secret.json");
+                new FileInputStream("/media/Workspace/git-repo/maintenance-receipts/src/main/resources/client_secret.json");
         GoogleClientSecrets clientSecrets =
                 GoogleClientSecrets.load(JSON_FACTORY, new InputStreamReader(in));
 
